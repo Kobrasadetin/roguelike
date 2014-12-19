@@ -1,0 +1,1 @@
+﻿#### Tuntikirjanpito##### Viikko 1###### 19.12.2014* projektin aloitus: Netbeans-asetukset, aihemäärittely yms.  * käytetty aika: 2 tuntia.
