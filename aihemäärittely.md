@@ -1,0 +1,1 @@
+# Aihe:Roguelike-peli.Toteutetaan peli, jossa pelaaja ohjaa luolastossa liikkuvaa sankaria, joka taistelee vihollisia vastaan, ker‰‰ tavaroita ja yritt‰‰ pysy‰ hengiss‰ pelin loppuun saakka.Luolasto on ruudukkopohjainen.## K‰ytt‰j‰t:Pelaaja### Pelaajan toiminnot:* pelaaja voi liikkua luolastossa
