@@ -19,7 +19,7 @@ public interface Settings {
 
     public static class DEFAULT_SETTINGS implements Settings {
 
-        int WIDTH = 20;
+        int WIDTH = 30;
         int HEIGHT = 20;
 
         @Override

@@ -54,7 +54,7 @@ public class BasicDungeon implements Dungeon {
     private void generateTiles() {
         tiles = new Tile[width][height];
         for (int x = 0; x < width; x++) {
-            for (int y = 0; y < width; y++) {
+            for (int y = 0; y < height; y++) {
                 tiles[x][y] = new BasicTile();
             }
         }

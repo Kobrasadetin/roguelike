@@ -10,13 +10,35 @@ package com.majesticbit.roguelike.domain;
  * @author Master
  */
 public interface Tile {
+
+    /** Returns textual description of the tile
+     *
+     * @return String containing description of the tile
+     */
     public String getDescription();
+
+    /**
+     *
+     * @return true if solid (cannot be moved trough, blocks sight)
+     */
     public boolean isSolid();
     public boolean isWall();
 
+    /** unset solid, unset wall
+     *
+     * @return true if successful
+     */
     public boolean buildOpening();
+
+    /** set wall, set solid
+     *
+     * @return true if successful
+     */
     public boolean buildWall();
     
+    /** OUT_OF_BOUNDS is the default tile returned for all positions outside the game area
+     *
+     */
     public static Tile OUT_OF_BOUNDS = new OUT_OF_BOUNDS();
         
     // OUT_OF_BOUNDS is the default tile for tiles outside our map

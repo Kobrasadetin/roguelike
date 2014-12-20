@@ -20,7 +20,9 @@ public class DefaultRoomGenerator implements RoomGenerator {
     public List<Element> generate(Settings settings) {
         //TODO
         elements = new ArrayList();
-        elements.add(new Room(2, 2, settings.getWidth() - 3, settings.getHeight() - 3));
+        elements.add(new Room(0, 0, 10, 19));
+        elements.add(new Room(20, 0, 29, 19));
+        elements.add(new Corridor(1, 8, 29, 8));
         return elements;
     }
 
