@@ -10,14 +10,15 @@ package com.majesticbit.roguelike.domain;
  * @author Master
  */
 public class BasicTile implements Tile {
-    
+
     private boolean solid;
     private boolean wall;
-    
-    public BasicTile()
-    {
+    private Description description;
+
+    public BasicTile() {
         solid = true;
         wall = false;
+        description = new TileDescription("a basic tile");
     }
 
     public void setSolid(boolean solid) {
@@ -25,15 +26,15 @@ public class BasicTile implements Tile {
     }
 
     @Override
-    public String getDescription() {
-        return ("a basic tile");
+    public Description getDescription() {
+        return description;
     }
 
     @Override
     public boolean isSolid() {
         return solid;
     }
-    
+
     @Override
     public boolean buildWall() {
         wall = true;
