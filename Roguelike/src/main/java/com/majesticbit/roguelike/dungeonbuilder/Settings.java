@@ -15,12 +15,12 @@ public interface Settings {
 
     public int getHeight();
 
-    public static Settings DEFAULT_SETTINGS = new DEFAULT_SETTINGS();
+    public static final Settings DEFAULT_SETTINGS = new DefaultSettings();
 
-    public static class DEFAULT_SETTINGS implements Settings {
+    public static class DefaultSettings implements Settings {
 
-        int WIDTH = 30;
-        int HEIGHT = 20;
+        static final int WIDTH = 30;
+        static final int HEIGHT = 20;
 
         @Override
         public int getWidth() {

@@ -32,9 +32,8 @@ public class DungeonBuilder {
         elements.addAll(generator.generate(settings));
         generateTiles();
     }
-    
-    public Dungeon toDungeon()
-    {
+
+    public Dungeon toDungeon() {
         return dungeon;
     }
 

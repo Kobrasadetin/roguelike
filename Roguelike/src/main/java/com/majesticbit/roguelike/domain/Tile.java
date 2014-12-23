@@ -47,10 +47,10 @@ public interface Tile {
      * game area
      *
      */
-    public static Tile OUT_OF_BOUNDS = new OUT_OF_BOUNDS();
+    public static final Tile OUT_OF_BOUNDS = new OutOfBounds();
 
     // OUT_OF_BOUNDS is the default tile for tiles outside our map
-    public static class OUT_OF_BOUNDS implements Tile {
+    public static class OutOfBounds implements Tile {
 
         @Override
         public Description getDescription() {
