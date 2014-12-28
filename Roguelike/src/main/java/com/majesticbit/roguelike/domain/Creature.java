@@ -5,19 +5,38 @@
  */
 package com.majesticbit.roguelike.domain;
 
-import java.util.List;
-
 /**
  *
  * @author Master
  */
-public interface Creature {
+public abstract class Creature implements DynamicObject {
 
-    /**
-     * Returns description of the creature
-     *
-     * @return Description containing description of the creature
-     */
-    public Description getDescription();
+    private Description description;
+    private Position position;
+    private CreatureController controller;
+
+    public void setPosition(Position position) {
+        this.position.set(position);
+    }
+
+    public Creature(Position position, Description description, CreatureController controller) {
+        this.position = position;
+        this.description = description;
+        this.controller = controller;
+    }
+
+    public void bestowKnowledge(BasicLevel level) {
+        controller.bestowKnowledge(level);
+    }
+
+    @Override
+    public Description getDescription() {
+        return description;
+    }
+
+    @Override
+    public Position getPosition() {
+        return position;
+    }
 
 }

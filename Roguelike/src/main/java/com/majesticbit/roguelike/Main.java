@@ -5,19 +5,18 @@
  */
 package com.majesticbit.roguelike;
 
-import com.majesticbit.roguelike.ascii.AsciiViewer;
-import com.majesticbit.roguelike.domain.Dungeon;
-import com.majesticbit.roguelike.dungeonbuilder.DungeonBuilder;
+import com.majesticbit.roguelike.domain.Game;
+import com.majesticbit.roguelike.gui.UserInterface;
 
 /**
  *
  * @author Master
  */
 public class Main {
-    
+
     public static void main(String[] args) {
-        Dungeon dungeon = new DungeonBuilder().toDungeon();
-        AsciiViewer viewer = new AsciiViewer(dungeon);
-        System.out.print(viewer.draw());
+        UserInterface ui = new UserInterface();
+        Game game = new Game(ui);
+        game.play();
     }
 }

@@ -11,17 +11,16 @@ import java.util.List;
  *
  * @author Master
  */
-public interface ItemContainer {
+public class EmptyContainer implements ItemContainer {
 
-    /**
-     *
-     * @return List containing all items in the container
-     */
-    public List<Item> getItems();
-    
-    /**
-     *
-     * @return true if the container has items
-     */
-    public boolean hasItems();
+    @Override
+    public List<Item> getItems() {
+        throw new UnsupportedOperationException("Tried to access items in empty container.");
+    }
+
+    @Override
+    public boolean hasItems() {
+        return false;
+    }
+
 }

@@ -5,6 +5,8 @@
  */
 package com.majesticbit.roguelike.domain;
 
+import com.majesticbit.roguelike.domain.dungeon.BasicTile;
+import com.majesticbit.roguelike.domain.dungeon.Tile;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

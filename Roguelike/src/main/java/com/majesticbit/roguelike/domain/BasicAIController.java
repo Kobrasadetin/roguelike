@@ -9,18 +9,11 @@ package com.majesticbit.roguelike.domain;
  *
  * @author Master
  */
-public interface Description {
+public class BasicAIController implements CreatureController {
 
-    /**
-     * Textual description as String.
-     *
-     * @return description as String.
-     */
-    public String getText();
+    @Override
+    public void bestowKnowledge(BasicLevel level) {
 
-    /**
-     *
-     * @return char symbol.
-     */
-    public char getSymbol();
+    }
+
 }

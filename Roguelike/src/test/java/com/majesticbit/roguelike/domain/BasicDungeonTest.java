@@ -5,9 +5,9 @@ package com.majesticbit.roguelike.domain;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.majesticbit.roguelike.domain.BasicDungeon;
-import com.majesticbit.roguelike.domain.Dungeon;
-import com.majesticbit.roguelike.domain.Tile;
+import com.majesticbit.roguelike.domain.dungeon.BasicDungeon;
+import com.majesticbit.roguelike.domain.dungeon.Dungeon;
+import com.majesticbit.roguelike.domain.dungeon.Tile;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

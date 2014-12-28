@@ -10,5 +10,5 @@ package com.majesticbit.roguelike.domain;
  * @author Master
  */
 public interface Item {
-    
+    public Description getDescription();
 }

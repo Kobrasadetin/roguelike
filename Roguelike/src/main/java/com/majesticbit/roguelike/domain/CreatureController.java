@@ -9,18 +9,7 @@ package com.majesticbit.roguelike.domain;
  *
  * @author Master
  */
-public interface Description {
+public interface CreatureController {
 
-    /**
-     * Textual description as String.
-     *
-     * @return description as String.
-     */
-    public String getText();
-
-    /**
-     *
-     * @return char symbol.
-     */
-    public char getSymbol();
+    public void bestowKnowledge(BasicLevel level);
 }

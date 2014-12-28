@@ -9,18 +9,6 @@ package com.majesticbit.roguelike.domain;
  *
  * @author Master
  */
-public interface Description {
-
-    /**
-     * Textual description as String.
-     *
-     * @return description as String.
-     */
-    public String getText();
-
-    /**
-     *
-     * @return char symbol.
-     */
-    public char getSymbol();
+public interface GeometryChangeListener {
+    public void geometryChanged();
 }

@@ -11,17 +11,20 @@ import java.util.List;
  *
  * @author Master
  */
-public interface ItemContainer {
+public interface DynamicObject {
 
     /**
+     * Returns description of the object
      *
-     * @return List containing all items in the container
+     * @return Description containing description of the object
      */
-    public List<Item> getItems();
-    
+    public Description getDescription();
+
     /**
+     * Returns the position of the object
      *
-     * @return true if the container has items
+     * @return Position, object's position
      */
-    public boolean hasItems();
+    public Position getPosition();
+
 }

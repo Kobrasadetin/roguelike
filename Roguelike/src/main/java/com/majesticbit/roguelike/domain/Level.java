@@ -5,23 +5,16 @@
  */
 package com.majesticbit.roguelike.domain;
 
+import com.majesticbit.roguelike.domain.dungeon.Dungeon;
 import java.util.List;
 
 /**
  *
  * @author Master
  */
-public interface ItemContainer {
+public interface Level {
 
-    /**
-     *
-     * @return List containing all items in the container
-     */
-    public List<Item> getItems();
-    
-    /**
-     *
-     * @return true if the container has items
-     */
-    public boolean hasItems();
+    public List<DynamicObject> getObjects();
+
+    public Dungeon getDungeon();
 }
