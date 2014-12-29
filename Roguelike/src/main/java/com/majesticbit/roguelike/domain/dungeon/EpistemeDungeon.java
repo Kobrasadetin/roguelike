@@ -5,8 +5,6 @@
  */
 package com.majesticbit.roguelike.domain.dungeon;
 
-import com.majesticbit.roguelike.domain.GeometryChangeListener;
-
 /**
  *
  * @author Master
@@ -17,6 +15,14 @@ public class EpistemeDungeon implements Dungeon {
 
     private Dungeon dungeon;
 
+    /**
+     * EpistemeDungeon contains creature's knowledge of the dungeon it dwells.
+     * EpistemeDungeon always contains accurate information; some of the tiles
+     * can be unknown, but visible tiles are always the same as the actual
+     * dungeon.
+     *
+     * @param dungeon the Dungeon EpistemeDungeon presents to the creature.
+     */
     public EpistemeDungeon(Dungeon dungeon) {
         this.dungeon = dungeon;
         knowledge = new boolean[dungeon.getWidth()][dungeon.getHeight()];
@@ -42,10 +48,27 @@ public class EpistemeDungeon implements Dungeon {
         }
     }
 
+    /**
+     *
+     */
     public void revealAllTiles() {
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
                 knowledge[x][y] = true;
+            }
+        }
+    }
+
+    /**
+     *
+     * @param mask floating point array representing new knowledge of the tiles
+     * @param threshold is the threshold above which a tile becomes known.
+     */
+    public void revealUsingFloatMask(float[][] mask, float threshold) {
+        for (int x = 0; x < dungeon.getWidth(); x++) {
+            for (int y = 0; y < dungeon.getHeight(); y++) {
+                // if we do not yet know about the tile, we will know about it if the threshold is reached
+                knowledge[x][y] = knowledge[x][y] || (mask[x][y] > threshold);
             }
         }
     }
@@ -57,6 +80,10 @@ public class EpistemeDungeon implements Dungeon {
         throw new UnsupportedOperationException("Not supported. (setTile in EpistemeDungeon)");
     }
 
+    /**
+     *
+     * @param toAdd
+     */
     @Override
     public void addGeometryChangeListener(GeometryChangeListener toAdd) {
         dungeon.addGeometryChangeListener(toAdd);

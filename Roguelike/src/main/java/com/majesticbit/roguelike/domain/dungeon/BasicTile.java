@@ -6,11 +6,9 @@
 package com.majesticbit.roguelike.domain.dungeon;
 
 import com.majesticbit.roguelike.domain.Description;
-import com.majesticbit.roguelike.domain.GeometryChangeEmitter;
-import com.majesticbit.roguelike.domain.GeometryChangeListener;
-import com.majesticbit.roguelike.domain.ItemContainer;
+import com.majesticbit.roguelike.domain.items.ItemContainer;
 import com.majesticbit.roguelike.domain.TextDescription;
-import com.majesticbit.roguelike.domain.TileContainer;
+import com.majesticbit.roguelike.domain.items.TileContainer;
 import java.util.ArrayList;
 import java.util.List;
 

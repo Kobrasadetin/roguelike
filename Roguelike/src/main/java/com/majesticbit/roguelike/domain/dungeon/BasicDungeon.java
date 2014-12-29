@@ -5,7 +5,6 @@
  */
 package com.majesticbit.roguelike.domain.dungeon;
 
-import com.majesticbit.roguelike.domain.GeometryChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,12 @@ public class BasicDungeon implements Dungeon, GeometryChangeListener {
     private Tile[][] tiles;
     List<GeometryChangeListener> listeners;
 
+    /**
+     * BasciDungeon consists of width*height BasicTiles
+     *
+     * @param width width of the dungeon in tiles
+     * @param height height of the dungeon in tiles
+     */
     public BasicDungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -69,8 +74,10 @@ public class BasicDungeon implements Dungeon, GeometryChangeListener {
         }
         return false;
     }
-    
 
+    /**
+     * Whenever the dungeon geometry changes, geometryChanged() is called.
+     */
     @Override
     public void geometryChanged() {
         for (GeometryChangeListener hl : listeners) {
@@ -78,6 +85,11 @@ public class BasicDungeon implements Dungeon, GeometryChangeListener {
         }
     }
 
+    /**
+     *
+     * @param toAdd GeometryChangeListener interested in messages about changing
+     * geometry.
+     */
     @Override
     public void addGeometryChangeListener(GeometryChangeListener toAdd) {
         listeners.add(toAdd);

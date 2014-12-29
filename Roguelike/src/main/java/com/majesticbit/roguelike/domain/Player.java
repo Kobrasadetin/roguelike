@@ -5,6 +5,10 @@
  */
 package com.majesticbit.roguelike.domain;
 
+import com.majesticbit.roguelike.domain.level.EpistemeLevel;
+import com.majesticbit.roguelike.domain.level.Level;
+import com.majesticbit.roguelike.domain.creatures.CreatureController;
+import com.majesticbit.roguelike.domain.creatures.Creature;
 import com.majesticbit.roguelike.gui.UserInterface;
 
 /**
@@ -15,14 +19,27 @@ public class Player implements CreatureController {
 
     private UserInterface userInterface;
     private EpistemeLevel knownLevel;
+    private Creature avatar;
 
-    public Player(UserInterface userInterface) {
+    public Creature getAvatar() {
+        return avatar;
+    }
+
+    public Player(Creature avatar, UserInterface userInterface) {
         this.userInterface = userInterface;
+        this.avatar = avatar;
     }
 
     @Override
-    public void bestowKnowledge(BasicLevel level) {
+    public void initializeKnowledge(Level level) {
         knownLevel = new EpistemeLevel(level);
+        userInterface.drawAscii(knownLevel);
+    }
+
+    public void bestowPartialKnowledge(Level level, float[][] map) {
+        if (level == knownLevel.getLevel()) {
+            knownLevel.addKnowledge(map);
+        }
         userInterface.drawAscii(knownLevel);
     }
 

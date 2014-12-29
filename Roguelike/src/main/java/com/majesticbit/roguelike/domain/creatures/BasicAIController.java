@@ -3,23 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.majesticbit.roguelike.gui;
+package com.majesticbit.roguelike.domain.creatures;
 
-import com.majesticbit.roguelike.domain.level.BasicLevel;
 import com.majesticbit.roguelike.domain.level.Level;
+import com.majesticbit.roguelike.domain.creatures.CreatureController;
 
 /**
  *
  * @author Master
  */
-public abstract class VisualInterface {
+public class BasicAIController implements CreatureController {
 
-    protected Level level;
+    @Override
+    public void initializeKnowledge(Level level) {
 
-    public void setLevel(Level level) {
-        this.level = level;
     }
-
-    public abstract void draw(Level level);
 
 }

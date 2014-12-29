@@ -38,7 +38,7 @@ public class BasicDungeonTest {
 
     @Before
     public void setUp() {
-        dungeon = new BasicDungeon(width,height);
+        dungeon = new BasicDungeon(width, height);
     }
 
     @After
@@ -51,23 +51,26 @@ public class BasicDungeonTest {
     // @Test
     // public void hello() {}
     @Test
-    public void TestForTilesInMap() {
+    public void testForTilesInMap() {
         Tile tile = dungeon.getTile(0, 0);
-        assertTrue(tile!=null);
+        assertTrue(tile != null);
     }
+
     @Test
-    public void TestForTilesInMapNotOutOfBounds() {
+    public void testForTilesInMapNotOutOfBounds() {
         Tile tile = dungeon.getTile(0, 0);
-        assertTrue(tile!=Tile.OUT_OF_BOUNDS);
+        assertTrue(tile != Tile.OUT_OF_BOUNDS);
     }
+
     @Test
-    public void TestForTilesOutsideMapWidth() {
-        Tile tile = dungeon.getTile(width+1, 0);
-        assertTrue(tile==Tile.OUT_OF_BOUNDS);
+    public void testForTilesOutsideMapWidth() {
+        Tile tile = dungeon.getTile(width + 1, 0);
+        assertTrue(tile == Tile.OUT_OF_BOUNDS);
     }
+
     @Test
-    public void TestForTilesOutsideMapHeight() {
-        Tile tile = dungeon.getTile(width-1, height+1);
-        assertTrue(tile==Tile.OUT_OF_BOUNDS);
+    public void testForTilesOutsideMapHeight() {
+        Tile tile = dungeon.getTile(width - 1, height + 1);
+        assertTrue(tile == Tile.OUT_OF_BOUNDS);
     }
 }

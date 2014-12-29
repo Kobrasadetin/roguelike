@@ -6,9 +6,9 @@
 package com.majesticbit.roguelike.gui;
 
 import com.majesticbit.roguelike.domain.dungeon.Dungeon;
-import com.majesticbit.roguelike.domain.DynamicObject;
-import com.majesticbit.roguelike.domain.BasicLevel;
-import com.majesticbit.roguelike.domain.Level;
+import com.majesticbit.roguelike.domain.level.DynamicObject;
+import com.majesticbit.roguelike.domain.level.BasicLevel;
+import com.majesticbit.roguelike.domain.level.Level;
 import com.majesticbit.roguelike.domain.Position;
 import com.majesticbit.roguelike.domain.dungeon.Tile;
 
@@ -21,26 +21,21 @@ public class AsciiViewer extends VisualInterface {
     private int width, height;
     private String baseString;
 
-    public AsciiViewer(Level level) {
-        this.width = level.getDungeon().getWidth();
-        this.height = level.getDungeon().getHeight();
-        super.setLevel(level);
-        initialize();
+    public AsciiViewer() {
     }
 
     @Override
-    public void draw() {
+    public void draw(Level level) {
         // fist, draw tiles
-        Level level = super.level;
         width = level.getDungeon().getWidth();
-        this.height = level.getDungeon().getHeight();
+        height = level.getDungeon().getHeight();
         Dungeon dungeon = level.getDungeon();
         StringBuilder[] line = new StringBuilder[height];
         for (int y = 0; y < height; y++) {
-            line[y] = new StringBuilder(baseString);
+            line[y] = new StringBuilder(width);
             for (int x = 0; x < width; x++) {
                 Tile tile = dungeon.getTile(x, y);
-                line[y].setCharAt(x, tile.getDescription().getSymbol());
+                line[y].append(tile.getDescription().getSymbol());
             }
         }
 
@@ -58,15 +53,6 @@ public class AsciiViewer extends VisualInterface {
         }
 
         System.out.println(output.toString());
-    }
-
-    private void initialize() {
-        StringBuilder dottedRow = new StringBuilder();
-        for (int x = 0; x < width; x += 8) {
-            dottedRow.append("........");
-        }
-        dottedRow.setLength(width);
-        baseString = dottedRow.toString();
     }
 
 }

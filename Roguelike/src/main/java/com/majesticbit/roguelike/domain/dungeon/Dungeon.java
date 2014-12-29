@@ -1,6 +1,5 @@
 package com.majesticbit.roguelike.domain.dungeon;
 
-import com.majesticbit.roguelike.domain.GeometryChangeEmitter;
 import java.util.ArrayList;
 import java.util.List;
 
