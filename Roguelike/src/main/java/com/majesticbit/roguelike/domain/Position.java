@@ -5,6 +5,8 @@
  */
 package com.majesticbit.roguelike.domain;
 
+import squidpony.squidgrid.util.Direction;
+
 /**
  *
  * @author Master
@@ -19,6 +21,11 @@ public class Position {
         this.y = y;
     }
 
+    public Position(Position position) {
+        this.x = position.x;
+        this.y = position.y;
+    }
+
     public void set(Position position) {
         this.x = position.x;
         this.y = position.y;
@@ -27,6 +34,17 @@ public class Position {
     public void set(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public void displace(Direction direction) {
+        this.x += direction.deltaX;
+        this.y += direction.deltaY;
+    }
+
+    public static Position displacedPosition(Position position, Direction direction) {
+        Position newPosition = new Position(position);
+        newPosition.displace(direction);
+        return newPosition;
     }
 
     @Override

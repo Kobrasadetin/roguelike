@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Master
  */
-public interface Tile extends GeometryChangeEmitter {
+public interface Tile extends ChangeEventTrigger {
 
     /**
      *
@@ -122,7 +122,7 @@ public interface Tile extends GeometryChangeEmitter {
         }
 
         @Override
-        public void addGeometryChangeListener(GeometryChangeListener toAdd) {
+        public void addChangeEventListener(ChangeEventListener toAdd) {
             //The static tile will never change, no need to add listeners.
         }
 

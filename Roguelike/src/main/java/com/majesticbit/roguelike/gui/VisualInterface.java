@@ -14,11 +14,6 @@ import com.majesticbit.roguelike.domain.level.Level;
  */
 public abstract class VisualInterface {
 
-    protected Level level;
-
-    public void setLevel(Level level) {
-        this.level = level;
-    }
 
     public abstract void draw(Level level);
 

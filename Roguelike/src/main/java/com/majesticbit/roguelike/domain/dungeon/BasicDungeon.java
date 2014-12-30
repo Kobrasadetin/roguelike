@@ -12,12 +12,12 @@ import java.util.List;
  *
  * @author Master
  */
-public class BasicDungeon implements Dungeon, GeometryChangeListener {
+public class BasicDungeon implements Dungeon, ChangeEventListener {
 
     private int width;
     private int height;
     private Tile[][] tiles;
-    List<GeometryChangeListener> listeners;
+    List<ChangeEventListener> listeners;
 
     /**
      * BasciDungeon consists of width*height BasicTiles
@@ -79,9 +79,9 @@ public class BasicDungeon implements Dungeon, GeometryChangeListener {
      * Whenever the dungeon geometry changes, geometryChanged() is called.
      */
     @Override
-    public void geometryChanged() {
-        for (GeometryChangeListener hl : listeners) {
-            hl.geometryChanged();
+    public void somethingHasChanged() {
+        for (ChangeEventListener hl : listeners) {
+            hl.somethingHasChanged();
         }
     }
 
@@ -91,7 +91,7 @@ public class BasicDungeon implements Dungeon, GeometryChangeListener {
      * geometry.
      */
     @Override
-    public void addGeometryChangeListener(GeometryChangeListener toAdd) {
+    public void addChangeEventListener(ChangeEventListener toAdd) {
         listeners.add(toAdd);
     }
 }

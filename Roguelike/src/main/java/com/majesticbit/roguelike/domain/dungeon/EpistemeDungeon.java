@@ -85,8 +85,8 @@ public class EpistemeDungeon implements Dungeon {
      * @param toAdd
      */
     @Override
-    public void addGeometryChangeListener(GeometryChangeListener toAdd) {
-        dungeon.addGeometryChangeListener(toAdd);
+    public void addChangeEventListener(ChangeEventListener toAdd) {
+        dungeon.addChangeEventListener(toAdd);
     }
 
     private static Tile unknownTile() {

@@ -5,6 +5,7 @@
  */
 package com.majesticbit.roguelike.domain;
 
+import com.majesticbit.roguelike.domain.creatures.Player;
 import com.majesticbit.roguelike.domain.level.Level;
 import com.majesticbit.roguelike.domain.level.BasicLevel;
 import com.majesticbit.roguelike.domain.creatures.Humanoid;
@@ -22,11 +23,12 @@ public class Game {
     private BasicLevel currentLevel;
     private Player player;
     private VisibilitySolver visibilitySolver;
-    private int currentTime = 0;
+
     private UserInterface ui;
 
     public Game(UserInterface ui) {
         this.ui = ui;
+        this.player = new Player(ui);
     }
 
     public Level getCurrentLevel() {
@@ -39,19 +41,27 @@ public class Game {
 
     public void play() {
         currentLevel = createNewLevel();
-        visibilitySolver = new VisibilitySolver(currentLevel);
-        Humanoid playerCreature = new Humanoid(new Position(4, 4), new TextDescription("player", '@'));
-        player = new Player(playerCreature, ui);
-        currentLevel.addCreature(playerCreature, playerCreature.getPosition());
-        player.initializeKnowledge(currentLevel);
-        player.bestowPartialKnowledge(currentLevel, visibilitySolver.calculateVisibility(player.getAvatar().getPosition()));
-
+        createPlayterAvatar();
+        for (int x = 0; x < 210; x++) {
+            currentLevel.advanceOneTimestep();
+        }
+        //player.bestowFullKnowledge(currentLevel);
     }
 
     private BasicLevel createNewLevel() {
         Dungeon dungeon = new DungeonBuilder().toDungeon();
         BasicLevel newLevel = new BasicLevel(dungeon);
         return newLevel;
+    }
+
+    private void advanceOneTimestep() {
+        currentLevel.advanceOneTimestep();
+    }
+
+    private void createPlayterAvatar() {
+        Humanoid playerCreature = new Humanoid(new Position(4, 4), new TextDescription("player", '@'));
+        playerCreature.setController(player);
+        currentLevel.addCreature(playerCreature, playerCreature.getPosition());
     }
 
 }

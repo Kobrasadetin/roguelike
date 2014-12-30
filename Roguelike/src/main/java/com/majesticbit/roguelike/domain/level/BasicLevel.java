@@ -5,9 +5,12 @@
  */
 package com.majesticbit.roguelike.domain.level;
 
+import com.majesticbit.roguelike.domain.simulation.DynamicObject;
+import com.majesticbit.roguelike.domain.simulation.DynamicSystem;
 import com.majesticbit.roguelike.domain.Position;
 import com.majesticbit.roguelike.domain.creatures.Creature;
 import com.majesticbit.roguelike.domain.dungeon.Dungeon;
+import com.majesticbit.roguelike.domain.fov.VisibilitySolver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,26 +18,19 @@ import java.util.List;
  *
  * @author Master
  */
-public class BasicLevel implements Level {
+public class BasicLevel extends DynamicSystem implements Level {
 
     private Dungeon dungeon;
     private List<DynamicObject> objects;
     private List<Creature> creatures;
-
-    @Override
-    public List<DynamicObject> getObjects() {
-        return objects;
-    }
-
-    @Override
-    public Dungeon getDungeon() {
-        return dungeon;
-    }
+    private int currentTime;
+    private VisibilitySolver visibilitySolver;
 
     public BasicLevel(Dungeon dungeon) {
         this.dungeon = dungeon;
-        objects = new ArrayList();
-        creatures = new ArrayList();
+        this.objects = new ArrayList();
+        this.creatures = new ArrayList();
+        this.visibilitySolver = new VisibilitySolver(this);
     }
 
     public boolean addCreature(Creature creature, Position position) {
@@ -44,6 +40,7 @@ public class BasicLevel implements Level {
                 objects.add(creature);
                 creature.setPosition(position);
                 creatures.add(creature);
+                creature.initializeKnowledge(this);
             }
             return true;
         }
@@ -57,6 +54,45 @@ public class BasicLevel implements Level {
             }
         }
         return true;
+    }
+
+    @Override
+    public VisibilitySolver getVisibilitySolver() {
+        return visibilitySolver;
+    }
+
+    @Override
+    public List<DynamicObject> getObjects() {
+        return objects;
+    }
+
+    @Override
+    public Dungeon getDungeon() {
+        return dungeon;
+    }
+
+    @Override
+    protected List<DynamicObject> dynamicObjects() {
+        return getObjects();
+    }
+
+    @Override
+    protected Dungeon getSimulatedDungeon() {
+        return getDungeon();
+    }
+
+    @Override
+    protected List<Creature> dynamicCreatures() {
+        return creatures;
+    }
+
+    @Override
+    protected void updateCreatures() {
+        for (Creature creature : creatures) {
+            creature.updateKnowledge(this);
+            creature.makeDecisions();
+            creature.executeActionIfReady();
+        }
     }
 
 }

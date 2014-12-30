@@ -5,7 +5,7 @@
  */
 package com.majesticbit.roguelike.domain.fov;
 
-import com.majesticbit.roguelike.domain.dungeon.GeometryChangeListener;
+import com.majesticbit.roguelike.domain.dungeon.ChangeEventListener;
 import com.majesticbit.roguelike.domain.level.Level;
 import com.majesticbit.roguelike.domain.Position;
 import com.majesticbit.roguelike.domain.dungeon.Dungeon;
@@ -16,7 +16,7 @@ import squidpony.squidgrid.fov.FOVSolver;
  *
  * @author Master
  */
-public class VisibilitySolver implements GeometryChangeListener {
+public class VisibilitySolver implements ChangeEventListener {
 
     private static final int RADIUS = 15;
     private float[][] dungeonVisibilityMap;
@@ -28,7 +28,7 @@ public class VisibilitySolver implements GeometryChangeListener {
         this.level = level;
         this.solver = solver;
         dungeon = level.getDungeon();
-        dungeon.addGeometryChangeListener(this);
+        dungeon.addChangeEventListener(this);
         dungeonVisibilityMap = convertToVisibilityMap(level);
     }
 
@@ -56,7 +56,7 @@ public class VisibilitySolver implements GeometryChangeListener {
     }
 
     @Override
-    public void geometryChanged() {
+    public void somethingHasChanged() {
         dungeonVisibilityMap = convertToVisibilityMap(level);
     }
 

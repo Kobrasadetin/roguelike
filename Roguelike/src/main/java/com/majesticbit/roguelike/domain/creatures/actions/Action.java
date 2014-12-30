@@ -6,6 +6,7 @@
 package com.majesticbit.roguelike.domain.creatures.actions;
 
 import com.majesticbit.roguelike.domain.creatures.Creature;
+import squidpony.squidgrid.util.Direction;
 
 /**
  *
@@ -13,14 +14,58 @@ import com.majesticbit.roguelike.domain.creatures.Creature;
  */
 public abstract class Action {
 
-    private int timeUntilComplete;
+    /**
+     *  
+     */
+    public static final Action NONE = new Wait();
 
-    public Action(int timeUntilComplete) {
-        this.timeUntilComplete = timeUntilComplete;
+    /**
+     * MOVE has direction NONE - it can be used to check if an action is of type
+     * Move
+     */
+    public static final Action MOVE = new Move();
+
+    /**
+     *
+     * @param direction
+     * @return
+     */
+    public static final Action move(Direction direction) {
+        return new Move(direction);
     }
 
-    public int getTimeUntilComplete() {
-        return timeUntilComplete;
+    /**
+     *
+     */
+    public Action() {
+    }
+
+    /**
+     *
+     * @param creature
+     * @return
+     */
+    public abstract int calculateTimeUntilComplete(Creature creature);
+
+    /**
+     *
+     * @param creature
+     */
+    public void execute(Creature creature) {
+    }
+
+    /**
+     * Can be used to check if a creature is currently engaged in a certain type
+     * of action. Default implementation compares the classes.
+     *
+     * @param action
+     * @return true if action is the same type as action
+     */
+    public boolean isOfType(Action action) {
+        if (getClass() != action.getClass()) {
+            return false;
+        }
+        return true;
     }
 
 }

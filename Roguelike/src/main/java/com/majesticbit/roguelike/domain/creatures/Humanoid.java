@@ -23,5 +23,5 @@ public class Humanoid extends Creature {
         super(position, description, controller);
 
     }
-    
+
 }

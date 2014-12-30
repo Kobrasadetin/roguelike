@@ -16,12 +16,12 @@ import java.util.List;
  *
  * @author Master
  */
-public class BasicTile implements Tile, GeometryChangeEmitter {
+public class BasicTile implements Tile, ChangeEventTrigger {
 
     private boolean solid;
     private boolean wall;
     private ItemContainer container;
-    private List<GeometryChangeListener> listeners;
+    private List<ChangeEventListener> listeners;
 
     public BasicTile() {
         solid = true;
@@ -68,8 +68,8 @@ public class BasicTile implements Tile, GeometryChangeEmitter {
     }
 
     private void geometryChange() {
-        for (GeometryChangeListener hl : listeners) {
-            hl.geometryChanged();
+        for (ChangeEventListener hl : listeners) {
+            hl.somethingHasChanged();
         }
     }
 
@@ -79,7 +79,7 @@ public class BasicTile implements Tile, GeometryChangeEmitter {
     }
 
     @Override
-    public void addGeometryChangeListener(GeometryChangeListener toAdd) {
+    public void addChangeEventListener(ChangeEventListener toAdd) {
         listeners.add(toAdd);
     }
 

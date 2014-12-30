@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.majesticbit.roguelike.domain.level;
+package com.majesticbit.roguelike.gui;
+
+import com.majesticbit.roguelike.domain.creatures.actions.Action;
 
 /**
  *
  * @author Master
  */
-public interface LevelKnowledge extends Level{
+public interface PlayerInput {
+
+    public Action getAction();
 }

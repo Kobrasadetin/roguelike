@@ -5,8 +5,9 @@
  */
 package com.majesticbit.roguelike.domain.level;
 
+import com.majesticbit.roguelike.domain.dungeon.ChangeEventListener;
 import com.majesticbit.roguelike.domain.level.Level;
-import com.majesticbit.roguelike.domain.level.DynamicObject;
+import com.majesticbit.roguelike.domain.simulation.DynamicObject;
 import com.majesticbit.roguelike.domain.dungeon.Dungeon;
 import com.majesticbit.roguelike.domain.dungeon.EpistemeDungeon;
 import com.majesticbit.roguelike.domain.fov.VisibilitySolver;
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author Master
  */
-public class EpistemeLevel implements LevelKnowledge {
+public class EpistemeLevel implements LevelKnowledge, ChangeEventListener {
 
     private EpistemeDungeon knownDungeon;
     private Level level;
@@ -43,6 +44,21 @@ public class EpistemeLevel implements LevelKnowledge {
     public void addKnowledge (float[][] map)
     {
         knownDungeon.revealUsingFloatMask(map, 0.1f);
+    }
+    
+    public void addFullKnowledge ()
+    {
+        knownDungeon.revealAllTiles();
+    }
+
+    @Override
+    public VisibilitySolver getVisibilitySolver() {
+        return this.level.getVisibilitySolver();
+    }
+
+    @Override
+    public void somethingHasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

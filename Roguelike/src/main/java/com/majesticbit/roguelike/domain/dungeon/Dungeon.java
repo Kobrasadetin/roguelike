@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Master
  */
-public interface Dungeon extends GeometryChangeEmitter {
+public interface Dungeon extends ChangeEventTrigger {
 
     /**
      *

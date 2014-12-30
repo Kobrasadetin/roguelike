@@ -5,53 +5,56 @@
  */
 package com.majesticbit.roguelike.gui;
 
-import com.majesticbit.roguelike.domain.dungeon.Dungeon;
-import com.majesticbit.roguelike.domain.simulation.DynamicObject;
-import com.majesticbit.roguelike.domain.level.BasicLevel;
-import com.majesticbit.roguelike.domain.level.Level;
 import com.majesticbit.roguelike.domain.Position;
+import com.majesticbit.roguelike.domain.dungeon.Dungeon;
 import com.majesticbit.roguelike.domain.dungeon.Tile;
+import com.majesticbit.roguelike.domain.simulation.DynamicObject;
+import com.majesticbit.roguelike.domain.level.Level;
+import java.awt.Font;
+import squidpony.squidgrid.gui.SGPane;
+import squidpony.squidgrid.gui.swing.SwingPane;
 
 /**
  *
  * @author Master
  */
-public class AsciiViewer extends VisualInterface {
+public class SwingViewer extends VisualInterface {
 
     private int width, height;
+    private SGPane pane;
 
-    public AsciiViewer() {
+    public SwingViewer() {
+        pane = new SwingPane();
+        pane.initialize(30, 20, new Font("TimesRoman", Font.PLAIN, 18));
     }
 
     @Override
     public void draw(Level level) {
-        // fist, draw tiles
-        width = level.getDungeon().getWidth();
-        height = level.getDungeon().getHeight();
+        pane.placeText(0, 0, characterMap(level));
+
+    }
+
+    public static char[][] characterMap(Level level) {
+
         Dungeon dungeon = level.getDungeon();
-        StringBuilder[] line = new StringBuilder[height];
+        int width = dungeon.getWidth();
+        int height = dungeon.getHeight();
+        char[][] map = new char[width][height];
+
         for (int y = 0; y < height; y++) {
-            line[y] = new StringBuilder(width);
             for (int x = 0; x < width; x++) {
                 Tile tile = dungeon.getTile(x, y);
-                line[y].append(tile.getDescription().getSymbol());
+                map[x][y] = tile.getDescription().getSymbol();
             }
         }
 
         // draw creatures and other dynamic objects
         for (DynamicObject object : level.getObjects()) {
             Position pos = object.getPosition();
-            line[pos.y].setCharAt(pos.x, object.getDescription().getSymbol());
+            map[pos.x][pos.y] = object.getDescription().getSymbol();
         }
 
-        // output graphics
-        StringBuilder output = new StringBuilder();
-        for (int y = 0; y < height; y++) {
-            output.append(line[y]);
-            output.append('\n');
-        }
-
-        System.out.println(output.toString());
+        return map;
     }
 
 }

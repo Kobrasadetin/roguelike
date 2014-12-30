@@ -7,9 +7,13 @@ package com.majesticbit.roguelike.domain.creatures;
 
 import com.majesticbit.roguelike.domain.level.BasicLevel;
 import com.majesticbit.roguelike.domain.Description;
-import com.majesticbit.roguelike.domain.level.DynamicObject;
+import com.majesticbit.roguelike.domain.simulation.MovementVector;
+import com.majesticbit.roguelike.domain.simulation.DynamicObject;
 import com.majesticbit.roguelike.domain.Position;
 import com.majesticbit.roguelike.domain.creatures.actions.Action;
+import com.majesticbit.roguelike.domain.creatures.actions.CreatureAction;
+import com.majesticbit.roguelike.domain.level.Level;
+import squidpony.squidgrid.util.Direction;
 
 /**
  *
@@ -20,7 +24,13 @@ public abstract class Creature implements DynamicObject {
     private Description description;
     private Position position;
     private CreatureController controller;
-    private Action currentAction;
+    private MovementVector movement;
+
+    public MovementVector getMovementVector() {
+        return movement;
+    }
+
+    private CreatureAction currentAction;
 
     /**
      *
@@ -39,14 +49,33 @@ public abstract class Creature implements DynamicObject {
         this.position = position;
         this.description = description;
         this.controller = controller;
+        this.movement = new MovementVector();
+        this.currentAction = new CreatureAction(this);
+        this.properties = new Properties();
     }
 
     /**
      *
      * @return the creature's current unfinished action.
      */
-    public Action getCurrentAction() {
+    public CreatureAction getCurrentAction() {
         return currentAction;
+    }
+
+    public boolean currentActionIsType(Action action) {
+        return currentAction.getAction().isOfType(action);
+    }
+
+    public void executeActionIfReady() {
+        if (currentAction.isReadyToExecute()) {
+            currentAction.execute();
+        }
+    }
+
+    public void makeDecisions() {
+        if (controller.wantsToMakeNewDecisions()) {
+            controller.decideAction();
+        }
     }
 
     /**
@@ -55,6 +84,10 @@ public abstract class Creature implements DynamicObject {
      */
     public Properties getProperties() {
         return properties;
+    }
+
+    public void changeAction(Action newAction) {
+        currentAction.setAction(newAction);
     }
 
     /**
@@ -68,10 +101,21 @@ public abstract class Creature implements DynamicObject {
     }
 
     /**
-     * setPosition calls Position.set() of the creature's position
+     * Gets the controller of the creature. This can be an AI controller or the
+     * player.
      *
-     * @param position the new position of the creature
+     * @return controller
      */
+    public CreatureController getController() {
+        return controller;
+    }
+    
+    public void updateKnowledge(Level level)
+    {
+        controller.bestowPartialKnowledge(level, level.getVisibilitySolver().calculateVisibility(position));
+    }
+
+    @Override
     public void setPosition(Position position) {
         this.position.set(position);
     }
@@ -80,8 +124,13 @@ public abstract class Creature implements DynamicObject {
      *
      * @param level
      */
-    public void bestowKnowledge(BasicLevel level) {
-        controller.initializeKnowledge(level);
+    public void initializeKnowledge(BasicLevel level) {
+        controller.initializeKnowledge(this, level);
+    }
+
+    @Override
+    public void addMovementToDirection(Direction direction) {
+        this.movement.addMovementToDirection(direction);
     }
 
     @Override
@@ -92,6 +141,11 @@ public abstract class Creature implements DynamicObject {
     @Override
     public Position getPosition() {
         return position;
+    }
+
+    @Override
+    public void advanceTimestep() {
+        currentAction.advanceTimestep();
     }
 
 }

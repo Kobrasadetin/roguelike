@@ -13,20 +13,16 @@ import com.majesticbit.roguelike.domain.TextDescription;
  * @author Master
  */
 public class TileDescription {
-    public static Description BasicDescribtion(Tile tile)
-    {
-        if (tile.isSolid())
-        {
-            if (tile.isWall())
-            {
+
+    public static Description BasicDescribtion(Tile tile) {
+        if (tile.isSolid()) {
+            if (tile.isWall()) {
                 return new TextDescription("A Wall", '#');
             }
-            else
-            {
-                return new TextDescription("Solid Rock", ' ');
-            }
+
+            return new TextDescription("Solid Rock", ' ');
         }
         return new TextDescription("Open space", '.');
     }
-    
+
 }

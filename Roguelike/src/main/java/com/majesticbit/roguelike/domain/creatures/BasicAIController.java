@@ -13,10 +13,27 @@ import com.majesticbit.roguelike.domain.creatures.CreatureController;
  * @author Master
  */
 public class BasicAIController implements CreatureController {
+    
+    //TODO:implementation
 
     @Override
-    public void initializeKnowledge(Level level) {
+    public void initializeKnowledge(Creature creature, Level level) {
 
+    }
+
+    @Override
+    public void bestowPartialKnowledge(Level level, float[][] map) {
+       
+    }
+
+    @Override
+    public boolean wantsToMakeNewDecisions() {
+        return false;
+    }
+
+    @Override
+    public void decideAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
