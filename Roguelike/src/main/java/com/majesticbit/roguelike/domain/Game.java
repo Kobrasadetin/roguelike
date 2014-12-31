@@ -42,7 +42,7 @@ public class Game {
     public void play() {
         currentLevel = createNewLevel();
         createPlayterAvatar();
-        for (int x = 0; x < 210; x++) {
+        while (!ui.playerWantsToQuit()) {
             currentLevel.advanceOneTimestep();
         }
         //player.bestowFullKnowledge(currentLevel);

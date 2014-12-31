@@ -22,7 +22,7 @@ public class SystemInput implements PlayerInput {
 
     @Override
     public Action getAction() {
-        System.out.println("wasd to move:");
+        System.out.println("wasd to move, q to quit:");
         String input = scanner.nextLine();
         return Parser.parse(input);
     }

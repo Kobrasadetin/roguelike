@@ -5,6 +5,7 @@
  */
 package com.majesticbit.roguelike.gui;
 
+import com.majesticbit.roguelike.domain.Game;
 import com.majesticbit.roguelike.domain.creatures.actions.Action;
 import com.majesticbit.roguelike.domain.level.Level;
 
@@ -16,10 +17,11 @@ public class UserInterface {
 
     private VisualInterface visualInterface;
     private PlayerInput input;
+    private boolean quitGame = false;
 
     public UserInterface() {
-        visualInterface = new AsciiViewer();
-        input = new SystemInput();
+        this.visualInterface = new AsciiViewer();
+        this.input = new SystemInput();
     }
 
     public void draw(Level level) {
@@ -27,7 +29,24 @@ public class UserInterface {
     }
 
     public Action getPlayerAction() {
-        return input.getAction();
+        Action playerAction = input.getAction();
+        if (checkForGameCommands(playerAction))
+        {
+            return Action.NONE;
+        }
+        return playerAction;
+    }
+
+    public boolean playerWantsToQuit() {
+        return quitGame;
+    }
+
+    private boolean checkForGameCommands(Action playerAction) {
+        if (playerAction.equals(Action.QUIT)) {
+            quitGame = true;
+            return true;
+        }
+        return false;
     }
 
 }

@@ -28,6 +28,8 @@ public class Parser {
                 return Action.move(Direction.DOWN);
             case 'd':
                 return Action.move(Direction.RIGHT);
+            case 'q':
+                return Action.QUIT;
         }
         return Action.NONE;
     }

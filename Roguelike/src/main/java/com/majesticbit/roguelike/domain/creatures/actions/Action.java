@@ -15,7 +15,7 @@ import squidpony.squidgrid.util.Direction;
 public abstract class Action {
 
     /**
-     *  
+     *
      */
     public static final Action NONE = new Wait();
 
@@ -24,6 +24,12 @@ public abstract class Action {
      * Move
      */
     public static final Action MOVE = new Move();
+
+    /**
+     * QUIT is an UI command to quit the game
+     *
+     */
+    public static final Action QUIT = new GameCommand("quit");
 
     /**
      *
