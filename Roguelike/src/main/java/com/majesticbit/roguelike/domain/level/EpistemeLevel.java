@@ -40,14 +40,12 @@ public class EpistemeLevel implements LevelKnowledge, ChangeEventListener {
     public Dungeon getDungeon() {
         return knownDungeon;
     }
-    
-    public void addKnowledge (float[][] map)
-    {
+
+    public void addKnowledge(float[][] map) {
         knownDungeon.revealUsingFloatMask(map, 0.1f);
     }
-    
-    public void addFullKnowledge ()
-    {
+
+    public void addFullKnowledge() {
         knownDungeon.revealAllTiles();
     }
 

@@ -14,7 +14,7 @@ import com.majesticbit.roguelike.domain.TextDescription;
  */
 public class TileDescription {
 
-    public static Description BasicDescribtion(Tile tile) {
+    public static Description basicDescribtion(Tile tile) {
         if (tile.isSolid()) {
             if (tile.isWall()) {
                 return new TextDescription("A Wall", '#');

@@ -73,9 +73,7 @@ public abstract class Creature implements DynamicObject {
     }
 
     public void makeDecisions() {
-        if (controller.wantsToMakeNewDecisions()) {
             controller.decideAction();
-        }
     }
 
     /**

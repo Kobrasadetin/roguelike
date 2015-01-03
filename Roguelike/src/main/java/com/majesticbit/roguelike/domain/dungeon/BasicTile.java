@@ -39,7 +39,7 @@ public class BasicTile implements Tile, ChangeEventTrigger {
 
     @Override
     public Description getDescription() {
-        return TileDescription.BasicDescribtion(this);
+        return TileDescription.basicDescribtion(this);
     }
 
     @Override

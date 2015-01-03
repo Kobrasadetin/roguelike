@@ -18,8 +18,7 @@ public class TileContainer implements ItemContainer {
 
     private List<Item> items;
 
-    public TileContainer()
-    {
+    public TileContainer() {
         items = new ArrayList();
     }
 

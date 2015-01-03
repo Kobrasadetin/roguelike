@@ -58,10 +58,10 @@ public class Player implements CreatureController {
 
     @Override
     public void decideAction() {
-        if (avatar.currentActionIsType(Action.NONE)) {
-            userInterface.draw(knownLevel);
-            avatar.changeAction(userInterface.getPlayerAction());
-        }
+            if (avatar.currentActionIsType(Action.NONE)) {
+                userInterface.draw(knownLevel);
+                avatar.changeAction(userInterface.getPlayerAction());
+            }
     }
 
 }

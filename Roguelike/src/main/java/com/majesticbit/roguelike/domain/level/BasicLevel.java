@@ -47,6 +47,10 @@ public class BasicLevel extends DynamicSystem implements Level {
         return false;
     }
 
+    public boolean addCreature(Creature creature) {
+        return addCreature(creature, creature.getPosition());
+    }
+
     private boolean isUnoccupied(Position position) {
         for (DynamicObject object : objects) {
             if (position.equals(object.getPosition())) {
