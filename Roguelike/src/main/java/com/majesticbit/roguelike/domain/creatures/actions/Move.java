@@ -15,18 +15,19 @@ import squidpony.squidgrid.util.Direction;
 public class Move extends Action {
 
     private Direction direction;
+    private Creature creature;
     private final static float DIAGONAL_COST = 1.41f;
 
     public Move() {
         this.direction = Direction.NONE;
     }
 
-    public Move(Direction direction) {
+    public Move(Creature creature, Direction direction) {
         this.direction = direction;
     }
 
     @Override
-    public int calculateTimeUntilComplete(Creature creature) {
+    public int calculateTimeUntilComplete() {
         if (!isDiagonal(this.direction)) {
             return creature.getProperties().getMovementDelay();
         } else {
@@ -35,7 +36,7 @@ public class Move extends Action {
     }
 
     @Override
-    public void execute(Creature creature) {
+    public void execute() {
         creature.addMovementToDirection(direction);
     }
 

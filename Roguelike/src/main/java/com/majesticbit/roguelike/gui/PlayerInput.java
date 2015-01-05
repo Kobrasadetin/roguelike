@@ -5,6 +5,7 @@
  */
 package com.majesticbit.roguelike.gui;
 
+import com.majesticbit.roguelike.domain.creatures.Creature;
 import com.majesticbit.roguelike.domain.creatures.actions.Action;
 
 /**
@@ -13,5 +14,5 @@ import com.majesticbit.roguelike.domain.creatures.actions.Action;
  */
 public interface PlayerInput {
 
-    public Action getAction();
+    public Action getAction(Creature creature);
 }

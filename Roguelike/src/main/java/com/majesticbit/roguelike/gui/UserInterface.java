@@ -6,6 +6,7 @@
 package com.majesticbit.roguelike.gui;
 
 import com.majesticbit.roguelike.domain.Game;
+import com.majesticbit.roguelike.domain.creatures.Creature;
 import com.majesticbit.roguelike.domain.creatures.actions.Action;
 import com.majesticbit.roguelike.domain.level.Level;
 
@@ -28,8 +29,8 @@ public class UserInterface {
         visualInterface.draw(level);
     }
 
-    public Action getPlayerAction() {
-        Action playerAction = input.getAction();
+    public Action getPlayerAction(Creature creature) {
+        Action playerAction = input.getAction(creature);
         if (checkForGameCommands(playerAction))
         {
             return Action.NONE;

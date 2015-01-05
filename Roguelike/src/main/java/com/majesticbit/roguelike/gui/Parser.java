@@ -5,6 +5,7 @@
  */
 package com.majesticbit.roguelike.gui;
 
+import com.majesticbit.roguelike.domain.creatures.Creature;
 import com.majesticbit.roguelike.domain.creatures.actions.Action;
 import squidpony.squidgrid.util.Direction;
 
@@ -21,13 +22,13 @@ public class Parser {
         }
         switch (input) {
             case 'w':
-                return Action.move(Direction.UP);
+                return Action.move(null, Direction.UP);
             case 'a':
-                return Action.move(Direction.LEFT);
+                return Action.move(null, Direction.LEFT);
             case 's':
-                return Action.move(Direction.DOWN);
+                return Action.move(null, Direction.DOWN);
             case 'd':
-                return Action.move(Direction.RIGHT);
+                return Action.move(null, Direction.RIGHT);
             case 'q':
                 return Action.QUIT;
         }

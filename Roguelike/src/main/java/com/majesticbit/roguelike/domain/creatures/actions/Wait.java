@@ -17,7 +17,7 @@ public class Wait extends Action {
     }
 
     @Override
-    public int calculateTimeUntilComplete(Creature creature) {
+    public int calculateTimeUntilComplete() {
         return 20;
     }
 

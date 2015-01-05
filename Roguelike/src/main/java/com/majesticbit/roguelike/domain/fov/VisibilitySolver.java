@@ -9,8 +9,8 @@ import com.majesticbit.roguelike.domain.dungeon.ChangeEventListener;
 import com.majesticbit.roguelike.domain.level.Level;
 import com.majesticbit.roguelike.domain.Position;
 import com.majesticbit.roguelike.domain.dungeon.Dungeon;
-import squidpony.squidgrid.fov.EliasFOV;
-import squidpony.squidgrid.fov.FOVSolver;
+import java.util.HashMap;
+import squidpony.squidgrid.fov.*;
 
 /**
  *
@@ -23,10 +23,12 @@ public class VisibilitySolver implements ChangeEventListener {
     private Level level;
     private Dungeon dungeon;
     private FOVSolver solver;
+    private HashMap<Position, float[][]> precalculatedMaps;
 
     public VisibilitySolver(Level level, FOVSolver solver) {
         this.level = level;
         this.solver = solver;
+        precalculatedMaps = new HashMap();
         dungeon = level.getDungeon();
         dungeon.addChangeEventListener(this);
         dungeonVisibilityMap = convertToVisibilityMap(level);
@@ -40,6 +42,7 @@ public class VisibilitySolver implements ChangeEventListener {
         int width = dungeon.getWidth();
         int height = dungeon.getHeight();
         float[][] map = new float[width][height];
+
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 map[x][y] = dungeon.getTile(x, y).isSolid() ? 1f : 0f;
@@ -49,10 +52,25 @@ public class VisibilitySolver implements ChangeEventListener {
     }
 
     public float[][] calculateVisibility(Position position) {
+
+        float[][] map = getPrecalculated(position);
+
+        if (map == null) {
+            map = calculateForNewPosition(position);
+            precalculatedMaps.put(position, map);
+        }
+        return map;
+    }
+
+    private float[][] calculateForNewPosition(Position position) {
         int width = dungeon.getWidth();
         int height = dungeon.getHeight();
         float[][] map = solver.calculateFOV(dungeonVisibilityMap, position.x, position.y, RADIUS);
         return map;
+    }
+
+    private float[][] getPrecalculated(Position pos) {
+        return precalculatedMaps.get(pos);
     }
 
     @Override

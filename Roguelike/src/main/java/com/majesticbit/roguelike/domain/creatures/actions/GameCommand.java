@@ -21,7 +21,7 @@ public class GameCommand extends Action {
     }
 
     @Override
-    public int calculateTimeUntilComplete(Creature creature) {
+    public int calculateTimeUntilComplete() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

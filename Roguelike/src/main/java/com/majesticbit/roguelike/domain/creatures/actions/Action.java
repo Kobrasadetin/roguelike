@@ -33,11 +33,12 @@ public abstract class Action {
 
     /**
      *
+     * @param creature
      * @param direction
      * @return
      */
-    public static final Action move(Direction direction) {
-        return new Move(direction);
+    public static final Action move(Creature creature, Direction direction) {
+        return new Move(creature, direction);
     }
 
     /**
@@ -51,13 +52,13 @@ public abstract class Action {
      * @param creature
      * @return
      */
-    public abstract int calculateTimeUntilComplete(Creature creature);
+    public abstract int calculateTimeUntilComplete();
 
     /**
      *
-     * @param creature
+     * 
      */
-    public void execute(Creature creature) {
+    public void execute() {
     }
 
     /**

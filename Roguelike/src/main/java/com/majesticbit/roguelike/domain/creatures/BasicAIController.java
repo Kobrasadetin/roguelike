@@ -33,7 +33,7 @@ public class BasicAIController implements CreatureController {
 
     @Override
     public void decideAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
 }

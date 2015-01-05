@@ -14,7 +14,6 @@ import com.majesticbit.roguelike.domain.creatures.Creature;
 public class CreatureAction {
 
     private int timeUntilComplete;
-    private Creature myCreature;
     private Action action;
 
     public Action getAction() {
@@ -26,13 +25,12 @@ public class CreatureAction {
     }
 
     public CreatureAction(Creature myCreature) {
-        this.myCreature = myCreature;
         this.action = Action.NONE;
     }
 
     public void setAction(Action action) {
         this.action = action;
-        this.timeUntilComplete = action.calculateTimeUntilComplete(myCreature);
+        this.timeUntilComplete = action.calculateTimeUntilComplete();
     }
 
     public boolean isReadyToExecute() {
@@ -40,7 +38,7 @@ public class CreatureAction {
     }
 
     public void execute() {
-        this.action.execute(myCreature);
+        this.action.execute();
         this.action = Action.NONE;
     }
 

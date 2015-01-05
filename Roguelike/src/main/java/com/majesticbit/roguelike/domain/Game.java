@@ -5,7 +5,7 @@
  */
 package com.majesticbit.roguelike.domain;
 
-import com.majesticbit.roguelike.domain.creatures.Player;
+import com.majesticbit.roguelike.domain.creatures.PlayerController;
 import com.majesticbit.roguelike.domain.level.Level;
 import com.majesticbit.roguelike.domain.level.BasicLevel;
 import com.majesticbit.roguelike.domain.creatures.Humanoid;
@@ -21,21 +21,21 @@ import com.majesticbit.roguelike.dungeonbuilder.DungeonBuilder;
 public class Game {
 
     private BasicLevel currentLevel;
-    private Player player;
+    private PlayerController player;
     private VisibilitySolver visibilitySolver;
 
     private UserInterface ui;
 
     public Game(UserInterface ui) {
         this.ui = ui;
-        this.player = new Player(ui);
+        this.player = new PlayerController(ui);
     }
 
     public Level getCurrentLevel() {
         return currentLevel;
     }
 
-    public Player getPlayer() {
+    public PlayerController getPlayer() {
         return player;
     }
 

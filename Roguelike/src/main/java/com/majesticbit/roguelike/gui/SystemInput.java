@@ -5,6 +5,7 @@
  */
 package com.majesticbit.roguelike.gui;
 
+import com.majesticbit.roguelike.domain.creatures.Creature;
 import com.majesticbit.roguelike.domain.creatures.actions.Action;
 import java.util.Scanner;
 
@@ -21,10 +22,10 @@ public class SystemInput implements PlayerInput {
     }
 
     @Override
-    public Action getAction() {
+    public Action getAction(Creature creature) {
         System.out.println("wasd to move, q to quit:");
         String input = scanner.nextLine();
-        return Parser.parse(input);
+        return Parser.parse(creature, input);
     }
 
 }
