@@ -6,6 +6,7 @@
 package com.majesticbit.roguelike.gui;
 
 import com.majesticbit.roguelike.domain.Game;
+import com.majesticbit.roguelike.domain.GameInterface;
 import com.majesticbit.roguelike.domain.creatures.actions.Action;
 import com.majesticbit.roguelike.domain.level.Level;
 
@@ -13,22 +14,34 @@ import com.majesticbit.roguelike.domain.level.Level;
  *
  * @author Master
  */
-public class UserInterface {
+public class UserInterface implements GameInterface{
 
     private VisualInterface visualInterface;
     private PlayerInput input;
-    private boolean quitGame = false;
+    private Game game;
 
-    public UserInterface() {
-        this.visualInterface = new AsciiViewer();
-        this.input = new SystemInput();
+    public UserInterface(Game game) {
+        addSwingViewer();
+        this.game = game;
+        game.addObserver(this);
+    }
+    
+    private void addSwingViewer()
+    {
+        SwingViewer viewer = new SwingViewer();
+        SwingPlayerInput input =  new SwingPlayerInput(viewer);
+        this.visualInterface = viewer;
+        this.input = input;
+        viewer.addKeyEventListener(input);
     }
 
-    public void draw(Level level) {
+    private void draw(Level level) {
         visualInterface.draw(level);
     }
 
-    public Action getPlayerAction() {
+    @Override
+    public Action getPlayerAction(Level level) {
+        draw(level);
         Action playerAction = input.getAction();
         if (checkForGameCommands(playerAction))
         {
@@ -37,16 +50,17 @@ public class UserInterface {
         return playerAction;
     }
 
-    public boolean playerWantsToQuit() {
-        return quitGame;
-    }
-
     private boolean checkForGameCommands(Action playerAction) {
         if (playerAction.equals(Action.QUIT)) {
-            quitGame = true;
-            return true;
+            //TODO: nicer quit
+            System.exit(0);
         }
         return false;
+    }
+
+    @Override
+    public void showMessage(String message) {
+        visualInterface.showMessage(message);
     }
 
 }

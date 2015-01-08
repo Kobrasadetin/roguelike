@@ -5,12 +5,16 @@
  */
 package com.majesticbit.roguelike.domain.simulation;
 
+import com.majesticbit.roguelike.domain.GameEvent;
+import com.majesticbit.roguelike.domain.GameEventBroadcaster;
+import com.majesticbit.roguelike.domain.GameEventListener;
 import com.majesticbit.roguelike.domain.Position;
 import com.majesticbit.roguelike.domain.creatures.Creature;
 import com.majesticbit.roguelike.domain.dungeon.ChangeEventListener;
 import com.majesticbit.roguelike.domain.dungeon.ChangeEventTrigger;
 import com.majesticbit.roguelike.domain.dungeon.Dungeon;
 import com.majesticbit.roguelike.domain.dungeon.Tile;
+import java.util.ArrayList;
 import java.util.List;
 import squidpony.squidgrid.util.Direction;
 
@@ -18,7 +22,7 @@ import squidpony.squidgrid.util.Direction;
  *
  * @author Master
  */
-public abstract class DynamicSystem implements ChangeEventTrigger {
+public abstract class DynamicSystem implements ChangeEventTrigger, GameEventBroadcaster {
 
     private int currentTime = 0;
 
@@ -30,7 +34,13 @@ public abstract class DynamicSystem implements ChangeEventTrigger {
 
     protected abstract void updateCreatures();
 
-    private List<ChangeEventListener> listeners;
+    private List<ChangeEventListener> changeEventListeners;
+    private List<GameEventListener> gameEventListeners;
+
+    public DynamicSystem() {
+        changeEventListeners = new ArrayList();
+        gameEventListeners = new ArrayList();
+    }
 
     /**
      * Simulates one timestep.
@@ -45,22 +55,25 @@ public abstract class DynamicSystem implements ChangeEventTrigger {
             object.advanceTimestep();
             MovementVector vector = object.getMovementVector();
             if (vector.potentiallyMoving()) {
-                Direction displacement = vector.performDisplacement();
+                Direction displacement = vector.checkDisplacement();
                 Position newPosition = Position.displacedPosition(object.getPosition(), displacement);
                 int newX = object.getPosition().x + displacement.deltaX;
                 int newY = object.getPosition().x + displacement.deltaX;
                 Tile collidedTile = checkTileCollision(newPosition);
                 if (collidedTile == null) {
-                    //no collision
+                    //no collision with tile
                     DynamicObject collider = checkObjectCollision(newPosition);
                     if (collider == null) {
-                        //no collision
+                        //no collision at all
                         object.setPosition(newPosition);
+                        vector.performDisplacement();
                     } else {
                         handleObjectCollision(object, collider);
+                        vector.performDisplacement();
                     }
                 } else {
                     handleTileCollision(object, collidedTile);
+                    vector.performDisplacement();
                 }
             }
         }
@@ -94,16 +107,28 @@ public abstract class DynamicSystem implements ChangeEventTrigger {
     }
 
     private void handleObjectCollision(DynamicObject object, DynamicObject collidesWith) {
-        //TODO: collisions
+        broadcastGameEvent(new CollisionEvent(object, collidesWith));
+        collidesWith.addMovementToDirection(object.getMovementVector().checkDisplacement());
     }
 
     private void handleTileCollision(DynamicObject object, Tile collidedTile) {
-        //TODO: collisions
+        broadcastGameEvent(new CollisionEvent(object, collidedTile));
     }
 
     @Override
     public void addChangeEventListener(ChangeEventListener toAdd) {
-        listeners.add(toAdd);
+        changeEventListeners.add(toAdd);
+    }
+
+    @Override
+    public void addMessageListener(GameEventListener listener) {
+        gameEventListeners.add(listener);
+    }
+
+    protected void broadcastGameEvent(GameEvent event) {
+        for (GameEventListener listener : gameEventListeners) {
+            listener.processGameEvent(event);
+        }
     }
 
 }

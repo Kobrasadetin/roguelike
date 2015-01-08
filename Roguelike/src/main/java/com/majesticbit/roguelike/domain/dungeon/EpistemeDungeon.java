@@ -15,6 +15,8 @@ public class EpistemeDungeon implements Dungeon {
 
     private Dungeon dungeon;
 
+    private int recentRevelation = 0;
+
     /**
      * EpistemeDungeon contains creature's knowledge of the dungeon it dwells.
      * EpistemeDungeon always contains accurate information; some of the tiles
@@ -65,10 +67,13 @@ public class EpistemeDungeon implements Dungeon {
      * @param threshold is the threshold above which a tile becomes known.
      */
     public void revealUsingFloatMask(float[][] mask, float threshold) {
-        for (int x = 0; x < dungeon.getWidth(); x++) {
-            for (int y = 0; y < dungeon.getHeight(); y++) {
-                // if we do not yet know about the tile, we will know about it if the threshold is reached
-                knowledge[x][y] = knowledge[x][y] || (mask[x][y] > threshold);
+        // if mask is not the same as the most recent mask
+        if (mask.hashCode() != recentRevelation) {
+            for (int x = 0; x < dungeon.getWidth(); x++) {
+                for (int y = 0; y < dungeon.getHeight(); y++) {
+                    // if we do not yet know about the tile, we will know about it if the threshold is reached
+                    knowledge[x][y] = knowledge[x][y] || (mask[x][y] > threshold);
+                }
             }
         }
     }

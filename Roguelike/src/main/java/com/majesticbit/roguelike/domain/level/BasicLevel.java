@@ -5,6 +5,7 @@
  */
 package com.majesticbit.roguelike.domain.level;
 
+import com.majesticbit.roguelike.domain.GameEventListener;
 import com.majesticbit.roguelike.domain.simulation.DynamicObject;
 import com.majesticbit.roguelike.domain.simulation.DynamicSystem;
 import com.majesticbit.roguelike.domain.Position;

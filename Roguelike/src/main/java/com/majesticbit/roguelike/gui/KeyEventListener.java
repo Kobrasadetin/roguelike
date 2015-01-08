@@ -5,18 +5,14 @@
  */
 package com.majesticbit.roguelike.gui;
 
-import com.majesticbit.roguelike.domain.level.BasicLevel;
-import com.majesticbit.roguelike.domain.level.Level;
+import java.awt.event.KeyListener;
 
 /**
  *
  * @author Master
  */
-public abstract class VisualInterface {
-
-
-    public abstract void draw(Level level);
+public interface KeyEventListener {
     
-    public abstract void showMessage(String message);
-
+    public void keyPressed(String keypress);
+    
 }

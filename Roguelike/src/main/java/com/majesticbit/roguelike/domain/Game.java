@@ -5,10 +5,11 @@
  */
 package com.majesticbit.roguelike.domain;
 
-import com.majesticbit.roguelike.domain.creatures.Player;
+import com.majesticbit.roguelike.domain.creatures.PlayerController;
 import com.majesticbit.roguelike.domain.level.Level;
 import com.majesticbit.roguelike.domain.level.BasicLevel;
 import com.majesticbit.roguelike.domain.creatures.Humanoid;
+import com.majesticbit.roguelike.domain.creatures.actions.Action;
 import com.majesticbit.roguelike.domain.dungeon.Dungeon;
 import com.majesticbit.roguelike.domain.fov.VisibilitySolver;
 import com.majesticbit.roguelike.gui.UserInterface;
@@ -18,31 +19,33 @@ import com.majesticbit.roguelike.dungeonbuilder.DungeonBuilder;
  *
  * @author Master
  */
-public class Game {
+public class Game implements Observable, GameEventListener{
 
     private BasicLevel currentLevel;
-    private Player player;
+    private PlayerController player;
     private VisibilitySolver visibilitySolver;
+    private boolean waitingPlayer;
+    private boolean playerQuit;
+    private GameInterface gameInterface;
 
-    private UserInterface ui;
-
-    public Game(UserInterface ui) {
-        this.ui = ui;
-        this.player = new Player(ui);
+    public Game() {
+        this.player = new PlayerController(this);
     }
 
     public Level getCurrentLevel() {
         return currentLevel;
     }
 
-    public Player getPlayer() {
+    public PlayerController getPlayer() {
         return player;
     }
 
     public void play() {
         currentLevel = createNewLevel();
+        currentLevel.addMessageListener(this);
         createPlayterAvatar();
-        while (!ui.playerWantsToQuit()) {
+        createTestMonster();
+        while (!playerQuit) {
             currentLevel.advanceOneTimestep();
         }
         //player.bestowFullKnowledge(currentLevel);
@@ -62,6 +65,33 @@ public class Game {
         Humanoid playerCreature = new Humanoid(new Position(4, 4), new TextDescription("player", '@'));
         playerCreature.setController(player);
         currentLevel.addCreature(playerCreature, playerCreature.getPosition());
+    }
+    
+    private void createTestMonster(){
+         Humanoid monster = new Humanoid(new Position(4, 12), new TextDescription("an orc", 'O'));
+         currentLevel.addCreature(monster);
+    }
+
+    public Action getPlayerAction() {
+        return gameInterface.getPlayerAction(player.getKnownLevel());
+    }
+
+    @Override
+    public void addObserver(GameInterface newGameInterface) {
+        this.gameInterface = newGameInterface;
+    }
+    
+    public void broadcastMessage(String message)
+    {
+        gameInterface.showMessage(message);
+    }
+
+    @Override
+    public void processGameEvent(GameEvent event) {
+        if (event.printsMessage())
+        {
+            gameInterface.showMessage(event.getMessage());
+        }
     }
 
 }

@@ -15,8 +15,9 @@ import com.majesticbit.roguelike.gui.UserInterface;
 public class Main {
 
     public static void main(String[] args) {
-        UserInterface ui = new UserInterface();
-        Game game = new Game(ui);
+        
+        Game game = new Game();
+        UserInterface ui = new UserInterface(game);
         game.play();
     }
 }

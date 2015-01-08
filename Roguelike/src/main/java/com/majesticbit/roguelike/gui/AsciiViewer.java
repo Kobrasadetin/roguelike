@@ -54,4 +54,9 @@ public class AsciiViewer extends VisualInterface {
         System.out.println(output.toString());
     }
 
+    @Override
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
+
 }

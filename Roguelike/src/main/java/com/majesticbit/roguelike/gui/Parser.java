@@ -19,6 +19,10 @@ public class Parser {
         if (!string.isEmpty()) {
             input = string.charAt(0);
         }
+        return parse(input);
+    }
+
+    public static Action parse(char input) {
         switch (input) {
             case 'w':
                 return Action.move(Direction.UP);

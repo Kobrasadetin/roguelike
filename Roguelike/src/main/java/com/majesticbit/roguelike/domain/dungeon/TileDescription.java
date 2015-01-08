@@ -17,12 +17,12 @@ public class TileDescription {
     public static Description basicDescribtion(Tile tile) {
         if (tile.isSolid()) {
             if (tile.isWall()) {
-                return new TextDescription("A Wall", '#');
+                return new TextDescription("a wall", '#');
             }
 
-            return new TextDescription("Solid Rock", ' ');
+            return new TextDescription("solid rock", ' ');
         }
-        return new TextDescription("Open space", '.');
+        return new TextDescription("open space", '.');
     }
 
 }

@@ -5,18 +5,12 @@
  */
 package com.majesticbit.roguelike.gui;
 
-import com.majesticbit.roguelike.domain.level.BasicLevel;
-import com.majesticbit.roguelike.domain.level.Level;
-
 /**
  *
  * @author Master
  */
-public abstract class VisualInterface {
-
-
-    public abstract void draw(Level level);
+public interface KeyEventTrigger {
     
-    public abstract void showMessage(String message);
-
+    public void addKeyEventListener(KeyEventListener listener);
+    
 }

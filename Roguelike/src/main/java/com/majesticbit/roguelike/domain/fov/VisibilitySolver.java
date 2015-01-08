@@ -39,6 +39,7 @@ public class VisibilitySolver implements ChangeEventListener {
     }
 
     private float[][] convertToVisibilityMap(Level level) {
+        precalculatedMaps.clear();
         int width = dungeon.getWidth();
         int height = dungeon.getHeight();
         float[][] map = new float[width][height];
@@ -66,6 +67,8 @@ public class VisibilitySolver implements ChangeEventListener {
         int width = dungeon.getWidth();
         int height = dungeon.getHeight();
         float[][] map = solver.calculateFOV(dungeonVisibilityMap, position.x, position.y, RADIUS);
+        //for some reason fov for the casting position used to behave erratically
+        map[position.x][position.y] = 1f;
         return map;
     }
 
