@@ -9,6 +9,7 @@ import com.majesticbit.roguelike.domain.creatures.PlayerController;
 import com.majesticbit.roguelike.domain.level.Level;
 import com.majesticbit.roguelike.domain.level.BasicLevel;
 import com.majesticbit.roguelike.domain.creatures.Humanoid;
+import com.majesticbit.roguelike.domain.creatures.RandomAIController;
 import com.majesticbit.roguelike.domain.creatures.actions.Action;
 import com.majesticbit.roguelike.domain.dungeon.Dungeon;
 import com.majesticbit.roguelike.domain.fov.VisibilitySolver;
@@ -44,7 +45,8 @@ public class Game implements Observable, GameEventListener{
         currentLevel = createNewLevel();
         currentLevel.addMessageListener(this);
         createPlayterAvatar();
-        createTestMonster();
+        createTestMonsters();
+        createTestPassive();
         while (!playerQuit) {
             currentLevel.advanceOneTimestep();
         }
@@ -67,8 +69,14 @@ public class Game implements Observable, GameEventListener{
         currentLevel.addCreature(playerCreature, playerCreature.getPosition());
     }
     
-    private void createTestMonster(){
-         Humanoid monster = new Humanoid(new Position(4, 12), new TextDescription("an orc", 'O'));
+    private void createTestMonsters(){
+         Humanoid monster = new Humanoid(new Position(4, 12), new TextDescription("an orc", 'O'), new RandomAIController());
+         Humanoid monster2 = new Humanoid(new Position(24, 12), new TextDescription("a snake", 's'), new RandomAIController());
+         currentLevel.addCreature(monster);
+         currentLevel.addCreature(monster2);
+    }
+    private void createTestPassive(){
+         Humanoid monster = new Humanoid(new Position(5, 8), new TextDescription("a boulder", '*'));
          currentLevel.addCreature(monster);
     }
 

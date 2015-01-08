@@ -22,7 +22,10 @@ public class DefaultRoomGenerator implements RoomGenerator {
         elements = new ArrayList();
         elements.add(new Room(0, 0, 10, 19));
         elements.add(new Room(20, 0, 29, 19));
-        elements.add(new Corridor(1, 8, 29, 8));
+        elements.add(new Room(13, 5, 17, 19));
+        elements.add(new Corridor(14, 6, 24, 6));
+        elements.add(new Corridor(14, 16, 24, 16));
+        elements.add(new Corridor(1, 8, 16, 8));
         return elements;
     }
 

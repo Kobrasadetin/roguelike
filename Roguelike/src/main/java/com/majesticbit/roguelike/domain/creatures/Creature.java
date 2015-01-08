@@ -26,6 +26,7 @@ public abstract class Creature implements DynamicObject {
     private CreatureController controller;
     private MovementVector movement;
 
+    @Override
     public MovementVector getMovementVector() {
         return movement;
     }
