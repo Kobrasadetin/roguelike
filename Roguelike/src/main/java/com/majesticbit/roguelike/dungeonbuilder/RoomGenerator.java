@@ -12,5 +12,6 @@ import java.util.List;
  * @author Master
  */
 public interface RoomGenerator {
+
     public List<Element> generate(Settings settings);
 }

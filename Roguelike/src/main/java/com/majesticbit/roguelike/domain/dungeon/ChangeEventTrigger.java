@@ -10,5 +10,6 @@ package com.majesticbit.roguelike.domain.dungeon;
  * @author Master
  */
 public interface ChangeEventTrigger {
+
     public void addChangeEventListener(ChangeEventListener toAdd);
 }

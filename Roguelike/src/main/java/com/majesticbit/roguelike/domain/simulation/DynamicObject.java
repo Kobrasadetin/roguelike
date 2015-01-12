@@ -42,7 +42,7 @@ public interface DynamicObject {
     public void addMovementToDirection(Direction direction);
 
     public MovementVector getMovementVector();
-    
+
     public void advanceTimestep();
 
 }

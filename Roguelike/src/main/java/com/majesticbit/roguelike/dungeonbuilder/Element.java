@@ -10,6 +10,8 @@ package com.majesticbit.roguelike.dungeonbuilder;
  * @author Master
  */
 public interface Element {
+
     public boolean isWall(int x, int y);
+
     public boolean isOpen(int x, int y);
 }

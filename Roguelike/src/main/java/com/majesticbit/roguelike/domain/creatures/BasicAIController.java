@@ -13,9 +13,8 @@ import com.majesticbit.roguelike.domain.creatures.CreatureController;
  * @author Master
  */
 public class BasicAIController implements CreatureController {
-    
-    //TODO:implementation
 
+    //TODO:implementation
     @Override
     public void initializeKnowledge(Creature creature, Level level) {
 
@@ -23,7 +22,7 @@ public class BasicAIController implements CreatureController {
 
     @Override
     public void bestowPartialKnowledge(Level level, float[][] map) {
-       
+
     }
 
     @Override

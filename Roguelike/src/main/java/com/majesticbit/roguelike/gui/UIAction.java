@@ -14,13 +14,12 @@ import javax.swing.Action;
  *
  * @author Master
  */
-public class UIAction extends AbstractAction{
-    
+public class UIAction extends AbstractAction {
+
     private String name;
     private KeyEventListener listener;
-    
-    public UIAction (String name, KeyEventListener listener)
-    {
+
+    public UIAction(String name, KeyEventListener listener) {
         this.name = name;
         this.listener = listener;
     }
@@ -34,6 +33,4 @@ public class UIAction extends AbstractAction{
         listener.keyPressed(name);
     }
 
-   
-    
 }

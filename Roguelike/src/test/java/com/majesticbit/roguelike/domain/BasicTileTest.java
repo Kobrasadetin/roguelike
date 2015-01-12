@@ -19,25 +19,25 @@ import static org.junit.Assert.*;
  * @author Master
  */
 public class BasicTileTest {
-    
+
     private Tile tile;
-    
+
     public BasicTileTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         tile = new BasicTile();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -47,5 +47,4 @@ public class BasicTileTest {
     //
     // @Test
     // public void hello() {}
-    
 }

@@ -29,7 +29,7 @@ public class SwingPlayerInput implements PlayerInput, KeyEventListener {
 
     @Override
     public Action getAction() {
-        while (lastKeyEvent == null){
+        while (lastKeyEvent == null) {
             try {
                 Thread.sleep(40);
             } catch (InterruptedException ex) {
@@ -45,6 +45,5 @@ public class SwingPlayerInput implements PlayerInput, KeyEventListener {
     public void keyPressed(String keypress) {
         lastKeyEvent = keypress;
     }
-
 
 }

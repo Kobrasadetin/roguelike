@@ -45,5 +45,4 @@ public class DungeonBuilderTest {
     /**
      * Test of toDungeon method, of class DungeonBuilder.
      */
-
 }

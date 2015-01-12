@@ -20,7 +20,7 @@ import com.majesticbit.roguelike.dungeonbuilder.DungeonBuilder;
  *
  * @author Master
  */
-public class Game implements Observable, GameEventListener{
+public class Game implements Observable, GameEventListener {
 
     private BasicLevel currentLevel;
     private PlayerController player;
@@ -68,16 +68,17 @@ public class Game implements Observable, GameEventListener{
         playerCreature.setController(player);
         currentLevel.addCreature(playerCreature, playerCreature.getPosition());
     }
-    
-    private void createTestMonsters(){
-         Humanoid monster = new Humanoid(new Position(4, 12), new TextDescription("an orc", 'O'), new RandomAIController());
-         Humanoid monster2 = new Humanoid(new Position(24, 12), new TextDescription("a snake", 's'), new RandomAIController());
-         currentLevel.addCreature(monster);
-         currentLevel.addCreature(monster2);
+
+    private void createTestMonsters() {
+        Humanoid monster = new Humanoid(new Position(4, 12), new TextDescription("an orc", 'O'), new RandomAIController());
+        Humanoid monster2 = new Humanoid(new Position(24, 12), new TextDescription("a snake", 's'), new RandomAIController());
+        currentLevel.addCreature(monster);
+        currentLevel.addCreature(monster2);
     }
-    private void createTestPassive(){
-         Humanoid monster = new Humanoid(new Position(5, 8), new TextDescription("a boulder", '*'));
-         currentLevel.addCreature(monster);
+
+    private void createTestPassive() {
+        Humanoid monster = new Humanoid(new Position(5, 8), new TextDescription("a boulder", '*'));
+        currentLevel.addCreature(monster);
     }
 
     public Action getPlayerAction() {
@@ -88,16 +89,14 @@ public class Game implements Observable, GameEventListener{
     public void addObserver(GameInterface newGameInterface) {
         this.gameInterface = newGameInterface;
     }
-    
-    public void broadcastMessage(String message)
-    {
+
+    public void broadcastMessage(String message) {
         gameInterface.showMessage(message);
     }
 
     @Override
     public void processGameEvent(GameEvent event) {
-        if (event.printsMessage())
-        {
+        if (event.printsMessage()) {
             gameInterface.showMessage(event.getMessage());
         }
     }

@@ -13,9 +13,9 @@ import com.majesticbit.roguelike.domain.level.Level;
  * @author Master
  */
 public interface GameInterface {
-    
+
     public Action getPlayerAction(Level level);
-    
+
     public void showMessage(String message);
-    
+
 }

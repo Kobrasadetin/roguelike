@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class Properties {
 
-
     private int movementDelay;
 
     public int getMovementDelay() {

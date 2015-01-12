@@ -14,7 +14,7 @@ import com.majesticbit.roguelike.domain.level.Level;
  *
  * @author Master
  */
-public class UserInterface implements GameInterface{
+public class UserInterface implements GameInterface {
 
     private VisualInterface visualInterface;
     private PlayerInput input;
@@ -25,11 +25,10 @@ public class UserInterface implements GameInterface{
         this.game = game;
         game.addObserver(this);
     }
-    
-    private void addSwingViewer()
-    {
+
+    private void addSwingViewer() {
         SwingViewer viewer = new SwingViewer();
-        SwingPlayerInput input =  new SwingPlayerInput(viewer);
+        SwingPlayerInput input = new SwingPlayerInput(viewer);
         this.visualInterface = viewer;
         this.input = input;
         viewer.addKeyEventListener(input);
@@ -43,8 +42,7 @@ public class UserInterface implements GameInterface{
     public Action getPlayerAction(Level level) {
         draw(level);
         Action playerAction = input.getAction();
-        if (checkForGameCommands(playerAction))
-        {
+        if (checkForGameCommands(playerAction)) {
             return Action.NONE;
         }
         return playerAction;

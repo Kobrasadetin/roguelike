@@ -18,7 +18,7 @@ public interface ItemContainer {
      * @return List containing all items in the container
      */
     public List<Item> getItems();
-    
+
     /**
      *
      * @return true if the container has items

@@ -74,7 +74,7 @@ public abstract class Creature implements DynamicObject {
     }
 
     public void makeDecisions() {
-            controller.decideAction();
+        controller.decideAction();
     }
 
     /**
@@ -108,9 +108,8 @@ public abstract class Creature implements DynamicObject {
     public CreatureController getController() {
         return controller;
     }
-    
-    public void updateKnowledge(Level level)
-    {
+
+    public void updateKnowledge(Level level) {
         controller.bestowPartialKnowledge(level, level.getVisibilitySolver().calculateVisibility(position));
     }
 

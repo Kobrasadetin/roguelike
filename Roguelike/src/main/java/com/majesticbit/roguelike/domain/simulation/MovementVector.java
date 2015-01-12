@@ -36,7 +36,7 @@ public class MovementVector {
         x = x - displacement.deltaX;
         y = y - displacement.deltaY;
     }
-    
+
     public Direction checkDisplacement() {
         Direction displacement = Direction.getDirection((int) x, (int) y);
         return displacement;

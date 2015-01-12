@@ -9,7 +9,8 @@ package com.majesticbit.roguelike.domain;
  *
  * @author Master
  */
-public interface GameEventListener {   
+public interface GameEventListener {
+
     public void processGameEvent(GameEvent event);
-   
+
 }

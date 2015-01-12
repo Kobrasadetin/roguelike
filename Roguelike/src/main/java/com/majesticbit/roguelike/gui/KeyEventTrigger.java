@@ -10,7 +10,7 @@ package com.majesticbit.roguelike.gui;
  * @author Master
  */
 public interface KeyEventTrigger {
-    
+
     public void addKeyEventListener(KeyEventListener listener);
-    
+
 }

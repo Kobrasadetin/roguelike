@@ -10,7 +10,7 @@ package com.majesticbit.roguelike.domain;
  * @author Master
  */
 public interface Observable {
-    
+
     public void addObserver(GameInterface observer);
-    
+
 }

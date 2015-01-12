@@ -12,7 +12,7 @@ import java.awt.event.KeyListener;
  * @author Master
  */
 public interface KeyEventListener {
-    
+
     public void keyPressed(String keypress);
-    
+
 }

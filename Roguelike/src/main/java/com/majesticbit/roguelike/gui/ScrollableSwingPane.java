@@ -14,12 +14,11 @@ import squidpony.squidgrid.gui.swing.SwingPane;
  *
  * @author Master
  */
-public class ScrollableSwingPane extends SwingPane implements Scrollable{
-    
+public class ScrollableSwingPane extends SwingPane implements Scrollable {
 
     @Override
     public Dimension getPreferredScrollableViewportSize() {
-        return new Dimension(640,640);
+        return new Dimension(640, 640);
     }
 
     @Override
@@ -41,5 +40,5 @@ public class ScrollableSwingPane extends SwingPane implements Scrollable{
     public boolean getScrollableTracksViewportHeight() {
         return true;
     }
-    
+
 }

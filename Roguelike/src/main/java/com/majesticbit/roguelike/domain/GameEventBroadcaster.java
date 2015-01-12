@@ -10,5 +10,6 @@ package com.majesticbit.roguelike.domain;
  * @author Master
  */
 public interface GameEventBroadcaster {
+
     public void addMessageListener(GameEventListener listener);
 }

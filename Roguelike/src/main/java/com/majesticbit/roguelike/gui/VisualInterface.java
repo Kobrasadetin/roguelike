@@ -14,9 +14,8 @@ import com.majesticbit.roguelike.domain.level.Level;
  */
 public abstract class VisualInterface {
 
-
     public abstract void draw(Level level);
-    
+
     public abstract void showMessage(String message);
 
 }

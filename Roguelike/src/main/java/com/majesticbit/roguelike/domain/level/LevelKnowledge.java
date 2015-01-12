@@ -9,5 +9,5 @@ package com.majesticbit.roguelike.domain.level;
  *
  * @author Master
  */
-public interface LevelKnowledge extends Level{
+public interface LevelKnowledge extends Level {
 }

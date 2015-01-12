@@ -31,9 +31,9 @@ public interface CreatureController {
      * detected tiles (0 to 1, default threshold 0.1)
      */
     public void bestowPartialKnowledge(Level level, float[][] map);
-    
+
     public boolean wantsToMakeNewDecisions();
-    
+
     public void decideAction();
 
 }

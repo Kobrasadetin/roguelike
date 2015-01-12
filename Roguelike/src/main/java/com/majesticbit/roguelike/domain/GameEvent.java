@@ -10,9 +10,9 @@ package com.majesticbit.roguelike.domain;
  * @author Master
  */
 public abstract class GameEvent {
-    
+
     public abstract boolean printsMessage();
+
     public abstract String getMessage();
-    
-    
+
 }
