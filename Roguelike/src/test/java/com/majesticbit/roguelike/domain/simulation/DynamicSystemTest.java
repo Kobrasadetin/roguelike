@@ -6,6 +6,8 @@
 package com.majesticbit.roguelike.domain.simulation;
 
 import com.majesticbit.roguelike.domain.Description;
+import com.majesticbit.roguelike.domain.GameEvent;
+import com.majesticbit.roguelike.domain.GameEventListener;
 import com.majesticbit.roguelike.domain.Position;
 import com.majesticbit.roguelike.domain.TextDescription;
 import com.majesticbit.roguelike.domain.creatures.Creature;
@@ -22,6 +24,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import squidpony.squidgrid.util.Direction;
 
 /**
  *
@@ -36,6 +39,7 @@ public class DynamicSystemTest {
     Dungeon dungeon;
     List<DynamicObject> objects;
     List<Creature> creatures;
+    EventListenerImpl listener;
 
     public DynamicSystemTest() {
     }
@@ -49,6 +53,7 @@ public class DynamicSystemTest {
         instance = theBasicLevel;
         objects = new ArrayList();
         creatures = new ArrayList();
+        listener = new EventListenerImpl();
     }
 
     @After
@@ -114,6 +119,15 @@ public class DynamicSystemTest {
         assertTrue(creature2.wasUpdated());
     }
 
+    @Test
+    public void testUpdateCreaturesInTimestep() {
+        theBasicLevel.addCreature(creature);
+        theBasicLevel.addCreature(creature2);
+        instance.advanceOneTimestep();
+        assertTrue(creature.wasUpdated());
+        assertTrue(creature2.wasUpdated());
+    }
+
     /**
      * Test of getCurrentTime method, of class DynamicSystem.
      */
@@ -133,7 +147,35 @@ public class DynamicSystemTest {
         assertEquals(instance.getCurrentTime(), 1);
     }
 
-    //TODO: test chance event listeners
+    @Test
+    public void testCollisionEvent() {
+        theBasicLevel.addCreature(creature);
+        creature.getMovementVector().addMovementToDirection(Direction.RIGHT);
+        theBasicLevel.addCreature(creature2);
+        instance.addMessageListener(listener);
+        instance.advanceOneTimestep();
+        assertEquals(listener.getRecentEvent().getClass(), CollisionEvent.class);
+    }
+
+    private static class EventListenerImpl implements GameEventListener {
+
+        GameEvent recentEvent;
+
+        public GameEvent getRecentEvent() {
+            return recentEvent;
+        }
+
+        public EventListenerImpl() {
+        }
+
+        @Override
+        public void processGameEvent(GameEvent event) {
+            recentEvent = event;
+        }
+
+    }
+
+    //TODO: test change event listeners
     //
     public class DynamicSystemImpl extends DynamicSystem {
 

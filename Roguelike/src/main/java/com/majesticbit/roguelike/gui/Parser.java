@@ -24,14 +24,22 @@ public class Parser {
 
     public static Action parse(char input) {
         switch (input) {
-            case 'w':
+            case '8':
                 return Action.move(Direction.UP);
-            case 'a':
+            case '4':
                 return Action.move(Direction.LEFT);
-            case 's':
+            case '2':
                 return Action.move(Direction.DOWN);
-            case 'd':
+            case '6':
                 return Action.move(Direction.RIGHT);
+            case '7':
+                return Action.move(Direction.UP_LEFT);
+            case '9':
+                return Action.move(Direction.UP_RIGHT);
+            case '1':
+                return Action.move(Direction.DOWN_LEFT);
+            case '3':
+                return Action.move(Direction.DOWN_RIGHT);
             case 'q':
                 return Action.QUIT;
         }

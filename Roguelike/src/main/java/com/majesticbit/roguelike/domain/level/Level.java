@@ -5,6 +5,7 @@
  */
 package com.majesticbit.roguelike.domain.level;
 
+import com.majesticbit.roguelike.domain.GameEvent;
 import com.majesticbit.roguelike.domain.simulation.DynamicObject;
 import com.majesticbit.roguelike.domain.dungeon.Dungeon;
 import com.majesticbit.roguelike.domain.fov.VisibilitySolver;
@@ -28,6 +29,10 @@ public interface Level {
      * @return the dungeon the level consists of
      */
     public Dungeon getDungeon();
-    
+
     public VisibilitySolver getVisibilitySolver();
+
+    public List<GameEvent> getRecentEvents();
+
+    public List<GameEvent> getEvents();
 }

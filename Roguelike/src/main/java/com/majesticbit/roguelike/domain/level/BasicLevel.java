@@ -5,7 +5,7 @@
  */
 package com.majesticbit.roguelike.domain.level;
 
-import com.majesticbit.roguelike.domain.GameEventListener;
+import com.majesticbit.roguelike.domain.GameEvent;
 import com.majesticbit.roguelike.domain.simulation.DynamicObject;
 import com.majesticbit.roguelike.domain.simulation.DynamicSystem;
 import com.majesticbit.roguelike.domain.Position;
@@ -26,6 +26,23 @@ public class BasicLevel extends DynamicSystem implements Level {
     private List<Creature> creatures;
     private int currentTime;
     private VisibilitySolver visibilitySolver;
+    private List<GameEvent> events;
+
+    public void addEvent(GameEvent event) {
+        events.add(event);
+        recentEvents.add(event);
+    }
+
+    @Override
+    public List<GameEvent> getEvents() {
+        return events;
+    }
+
+    @Override
+    public List<GameEvent> getRecentEvents() {
+        return recentEvents;
+    }
+    private List<GameEvent> recentEvents;
 
     public BasicLevel(Dungeon dungeon) {
         this.dungeon = dungeon;

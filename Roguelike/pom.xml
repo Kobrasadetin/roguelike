@@ -51,6 +51,13 @@
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>0.30</version>
+                <configuration>
+                    <targetClasses>
+                        <param>com.majesticbit.roguelike</param>
+                        <param>com.majesticbit.roguelike.domain.*</param>
+                        <param>com.majesticbit.roguelike.dungeonbuilder.*</param>
+                    </targetClasses>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

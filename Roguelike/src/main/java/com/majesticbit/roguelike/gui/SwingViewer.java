@@ -10,28 +10,17 @@ import com.majesticbit.roguelike.domain.dungeon.Dungeon;
 import com.majesticbit.roguelike.domain.dungeon.Tile;
 import com.majesticbit.roguelike.domain.simulation.DynamicObject;
 import com.majesticbit.roguelike.domain.level.Level;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.Action;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.ScrollPaneLayout;
-import squidpony.squidgrid.gui.SGPane;
 import squidpony.squidgrid.gui.swing.SwingPane;
 
 /**
@@ -50,7 +39,7 @@ public class SwingViewer extends VisualInterface implements KeyEventListener, Ke
 
     public SwingViewer() {
         pane = new ScrollableSwingPane();
-        pane.initialize(30, 20, new Font("TimesRoman", Font.PLAIN, 18));
+        pane.initialize(40, 40, new Font("TimesRoman", Font.PLAIN, 18));
         frame = new GameFrame();
         frame.addMapComponent(pane);
         frame.setVisible(true);
@@ -60,10 +49,19 @@ public class SwingViewer extends VisualInterface implements KeyEventListener, Ke
 
     private void assignInputMap() {
         frame.getButton().addActionListener(this);
-        createAction('w', "w");
-        createAction('a', "a");
-        createAction('s', "s");
-        createAction('d', "d");
+        createAction('1', "1");
+        createAction('2', "2");
+        createAction('3', "3");
+        createAction('4', "4");
+        createAction('5', "5");
+        createAction('6', "6");
+        createAction('7', "7");
+        createAction('8', "8");
+        createAction('9', "9");
+        createAction('w', "8");
+        createAction('a', "4");
+        createAction('s', "2");
+        createAction('d', "6");
 
     }
 

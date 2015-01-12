@@ -5,6 +5,7 @@
  */
 package com.majesticbit.roguelike.domain.level;
 
+import com.majesticbit.roguelike.domain.GameEvent;
 import com.majesticbit.roguelike.domain.Position;
 import com.majesticbit.roguelike.domain.dungeon.ChangeEventListener;
 import com.majesticbit.roguelike.domain.level.Level;
@@ -70,6 +71,16 @@ public class EpistemeLevel implements LevelKnowledge, ChangeEventListener {
     @Override
     public void somethingHasChanged() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<GameEvent> getRecentEvents() {
+        return level.getRecentEvents();
+    }
+
+    @Override
+    public List<GameEvent> getEvents() {
+        return level.getEvents();
     }
 
 }
